@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Profile Card Section */
+
+.profile-card {
+  z-index: 999;
+  width: 200px;
+  height: 200px;
+  background-color: grey;
+  position: fixed;
+  border-radius: 5px;
+}
+
+.arrow {
+  width: 10px;
+  height: 10px;
+  z-index: 900;
+  background-color: grey;
+  position: fixed;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Safari 3-8 */
+  transform: rotate(45deg);
+}
+
+.profile-card-hidden {
+  z-index: 999;
+  width: 200px;
+  height: 200px;
+  background-color: grey;
+  position: fixed;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.arrow-hidden {
+  width: 10px;
+  height: 10px;
+  z-index: 900;
+  background-color: grey;
+  position: fixed;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Safari 3-8 */
+  transform: rotate(45deg);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
