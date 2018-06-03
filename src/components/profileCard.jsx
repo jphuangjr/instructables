@@ -8,13 +8,25 @@ export default class ProfileCard extends Component {
    userData
   */
 
-    monthDiff(d1, d2) {
-        var months;
-        months = (d2.getFullYear() - d1.getFullYear()) * 12;
-        months -= d1.getMonth() + 1;
-        months += d2.getMonth();
-        return months <= 0 ? 0 : months;
-    }
+  monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth() + 1;
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+  }
+  isFollowing() {
+      const scope = this;
+      console.log(this.props.myData.subscriptions)
+      var follower = scope.props.myData.subscriptions.filter(function(v) {
+          return v.screenName == scope.props.userData.screenName
+      })
+      if(follower.length > 0) {
+          return true;
+      } else {
+          return false;
+      }
+  }
   render() {
     const user = this.props.userData;
     var data = ["Instructables","views","Comments","Lessons","Joined"];
@@ -25,7 +37,8 @@ export default class ProfileCard extends Component {
         views: user.views,
         Comments: user.commentCount,
         Lessons: user.lessonCount,
-        Joined: joinedDate.getFullYear()
+        Joined: joinedDate.getFullYear(),
+        followId: user.id
     }
     var badge;
     if (user.views + user.featuredCount*250000 > 5000000) {
@@ -35,9 +48,8 @@ export default class ProfileCard extends Component {
     } else if(this.monthDiff.call(this, joinedDate, todayDate) <=4) {
         badge = "New";
     } else {
-        badge = "Super";
+        badge = null;
     }
-    console.log("badge: ", badge)
     return (
     <div>
       <div className={this.props.hoverState ? "profile-card" : "profile-card-hidden"} style={{top: this.props.top, left: this.props.left}}>
@@ -49,10 +61,10 @@ export default class ProfileCard extends Component {
                     </div>
                     <div className="card-user-section">
                         <div className="card-username">
-                            <b>{user.screenName}</b> <span className="card-badge">{badge}</span>
+                            <b>{user.screenName}</b> {badge && <span class="label label-default">{badge}</span>}
                         </div>
                         <div>
-                            <button className="card-follow-button">Follow</button> <span className="card-follower-count">{user.followersCount}</span>
+                            <button onClick={this.props.followUser} className="btn btn-yellow">{this.isFollowing.call(this) ?  "✓ Following" : "Follow"}</button> <span className="card-follower-count">{user.followersCount}</span>
                         </div>
                     </div>
                 </div>

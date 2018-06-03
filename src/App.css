@@ -33,7 +33,7 @@
   opacity: 1;
   transition: visibility 0s 1s, opacity 1s linear;
   z-index: 998;
-  width: 240px;
+  width: 260px;
   height: 280px;
   background-color: white;
   box-shadow: 3px 3px 5px #E4E4E4, -1px -1px #E4E4E4;
@@ -45,7 +45,7 @@
 
 .profile-card-hidden {
   z-index: 999;
-  width: 240px;
+  width: 260px;
   height: 280px;
   background-color: white;
   box-shadow: 3px 3px 5px #E4E4E4, -1px -1px #E4E4E4;
@@ -127,7 +127,7 @@
 
 .card-follower-count {
   height: 5px;
-  padding: 3px 7px 5px;
+  padding: 7px 10px 8px;
   border: 1px solid lightgray;
   margin-left: 5px;
 }

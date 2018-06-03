@@ -18,6 +18,20 @@ export default class Card extends Component {
     };
   }
 
+  followUser() {
+    const id = this.state.userData.id;
+    const opts = {following: true, memberId:id};
+    fetch('https://www.instructables.com/json-api/setFollowing', {
+        method: 'post',
+        body: JSON.stringify(opts)
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log('Created Gist:', data);
+        this.getUserData.call(this, this.stae.userData.screenName);
+    });
+  }
+
   getUserData(user) {
     fetch('http://crossorigin.me/https://www.instructables.com/json-api/showAuthorModel?screenName=' + user,{
       mode: 'cors',
@@ -61,10 +75,10 @@ export default class Card extends Component {
     return (
       <li>
         <div className="explore-cover-item cover-item">
-          <a className="cover-image cover" href={this.props.link}><img className="cover" src={this.props.img} TITLE={this.props.title}/></a>
+          <a className="cover-image cover" href={this.props.link}><img className="cover" src={this.props.img} title={this.props.title}/></a>
           <div className="cover-info cover">
             <span className="title"><a href={this.props.link}>{this.props.title}</a></span><br />
-            {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData}/>}
+            {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData} myData={this.props.myData} followUser={this.followUser.bind(this)}/>}
             <span className="author" onMouseEnter={this.hoverOn.bind(this)}> by <a href={"https://www.instructables.com/member/" + this.props.member}>{this.props.member}</a></span><span className="channel"> in <a href={this.props.channelLink}>{this.props.channel}</a></span>
           </div>
         </div>
