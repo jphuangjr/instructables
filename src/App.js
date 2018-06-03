@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Card from "./components/card"
+import cardData from "./data";
 
 /*
    props: link, img, imgAlt, title, authorProfile, authorHandle, channelLink, channel
@@ -23,8 +24,9 @@ class App extends Component {
           <div id="explore-main" className="container">
             <div className="explore-content">
               <ul className="explore-covers-list clearfix">
-                <Card {...props}/>
-                <Card {...props}/>
+                {cardData.map(function(v){
+                  return <Card {...v}/>
+                })}
               </ul>
             </div>
           </div>

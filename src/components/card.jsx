@@ -2,46 +2,70 @@ import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import '../App.css';
 import ProfileCard from "./profileCard";
+import Underscore from "underscore";
 
 export default class Card extends Component {
   /*
    props: link, img, title, authorProfile, authorHandle, channelLink, channel
   */
  constructor(props) {
-  super(props);
-  this.state = {
-    hover: false,
-    top: 0,
-    left: 0
-  };
+    super(props);
+    this.state = {
+      hover: false,
+      top: 0,
+      left: 0,
+      userData: {}
+    };
   }
+
+  getUserData(user) {
+    fetch('http://crossorigin.me/https://www.instructables.com/json-api/showAuthorModel?screenName=' + user,{
+      mode: 'cors',
+      method: 'GET'
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({userData: result})
+      }
+    )
+  }
+
   hoverOn(e){
+    this.getUserData.call(this, e.target.innerHTML)
     let left;
     let top;
     const boundingClientRect = e.target.getBoundingClientRect();
     const targetTop = boundingClientRect.top;
     const targetLeft = boundingClientRect.left;
-    const targetWidth = boundingClientRect.width;
-    const targetHeight = boundingClientRect.height;
     left = targetLeft
-    top = targetTop - 210;
+    top = targetTop - 293;
     this.setState({ hover: true, left: left, top: top });
-    console.log(e.target.getBoundingClientRect())
 
   }
-  hoverOff(e){ 
-    console.log("hoverOff")
-    this.setState({ hover: false });    
+  hoverOff(e){
+    const scope = this;
+    var classes = e.target.className.split(" ");
+    if(classes.indexOf("cover") > -1) {
+      scope.setState({hover: false});
+    }
+  }
+  componentDidMount() {
+    document.body.addEventListener("mouseover", this.hoverOff.bind(this));
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener("mouseover", this.hoverOff.bind(this));
   }
   render() {
     return (
       <li>
         <div className="explore-cover-item cover-item">
-          <a className="cover-image" href={this.props.link}><img src={this.props.img} alt={this.props.title}/></a>
-          <div className="cover-info">
+          <a className="cover-image cover" href={this.props.link}><img className="cover" src={this.props.img} TITLE={this.props.title}/></a>
+          <div className="cover-info cover">
             <span className="title"><a href={this.props.link}>{this.props.title}</a></span><br />
-            {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover}/>}
-            <span className="author" onMouseEnter={this.hoverOn.bind(this)} onMouseLeave={this.hoverOff.bind(this)}> by <a href={"https://www.instructables.com/member/" + this.props.member}>{this.props.member}</a></span><span className="channel"> in <a href={this.props.channelLink}>{this.props.channel}</a></span>
+            {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData}/>}
+            <span className="author" onMouseEnter={this.hoverOn.bind(this)}> by <a href={"https://www.instructables.com/member/" + this.props.member}>{this.props.member}</a></span><span className="channel"> in <a href={this.props.channelLink}>{this.props.channel}</a></span>
           </div>
         </div>
       </li>
