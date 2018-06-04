@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from "react-dom";
-import '../App.css';
+import './componentResources/card.css';
 import ProfileCard from "./profileCard";
 import Underscore from "underscore";
 
@@ -8,6 +9,48 @@ export default class Card extends Component {
   /*
    props: link, img, title, authorProfile, authorHandle, channelLink, channel
   */
+ static propTypes = {
+    /**
+     * @prop {string} link []
+     * The link for the instructable
+     */
+    link: PropTypes.string,
+    /**
+     * @prop {string} img []
+     * The image link
+     */
+    img: PropTypes.string,
+    /**
+     * @prop {string} title []
+     * The title for the instructable
+     */
+    title: PropTypes.string,
+    /**
+     * @prop {string} member []
+     * The authors screenName
+     */
+    member: PropTypes.string,
+    /**
+     * @prop {string} channelLink []
+     * The link for the instructable channel
+     */
+    channelLink: PropTypes.string,
+    /**
+     * @prop {string} channel []
+     * The title for the channel
+     */
+    channel: PropTypes.string,
+    /**
+     * @prop {object} userData []
+     * Data object of the author
+     */
+    userData: PropTypes.object,
+    /**
+     * @prop {object} myData []
+     * Data object of the user
+     */
+    myData: PropTypes.object
+  };
  constructor(props) {
     super(props);
     this.state = {

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ajax-request": "^1.2.3",
+    "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "request": "^2.87.0",
@@ -17,6 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && s3cmd sync build/* s3://instructables && echo '🚀  Deployed!'"
   }
 }

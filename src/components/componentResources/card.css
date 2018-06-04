@@ -1,0 +1,39 @@
+.card-body {
+    padding: 20px;
+  }
+  
+  .card-top-section {
+    display: flex;
+    padding-bottom: 10px;
+  }
+  
+  .card-profile-image {
+    margin-right: 15px;
+  }
+  
+  .card-username {
+    margin-bottom: 10px;
+  }
+  
+  .card-badge {
+    font-size: 10px;
+    color: white;
+    background-color: gray;
+    padding: 2px;
+    border-radius: 2px;
+  }
+  
+  .card-follower-count {
+    height: 5px;
+    padding: 7px 10px 8px;
+    border: 1px solid lightgray;
+    margin-left: 5px;
+  }
+  
+  .card-follow-button {
+    background-color: #F0AD4E;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 7px 3px;
+  }
+  

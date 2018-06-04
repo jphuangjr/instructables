@@ -17,7 +17,7 @@ class App extends Component {
       myData: {}
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     var user = unescape(sampleCookie /* Replace with document.cookie on development */).split('"screenName":"')[1].split('",')[0];
     fetch('http://crossorigin.me/https://www.instructables.com/json-api/showAuthorModel?screenName=' + user,{
       mode: 'cors',

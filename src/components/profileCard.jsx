@@ -1,12 +1,46 @@
 import React, { Component } from 'react';
-import '../App.css';
+import PropTypes from 'prop-types';
+import './componentResources/profileCard.css';
 import InfoBox from "./infoBox";
 
 export default class ProfileCard extends Component {
   /*
-   props: link, img, title, authorProfile, authorHandle, channelLink, channel, hoverState,
-   userData
+   {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData} myData={this.props.myData} followUser={this.followUser.bind(this)}/>}
   */
+  static propTypes = {
+    /**
+     * @prop {number} top []
+     * Top for position fixed of card
+     */
+    top: PropTypes.number,
+  
+    /**
+     * @prop {number} left []
+     * Left for position fixed of card
+     */
+    left: PropTypes.number,
+    
+    /**
+     * @prop {bool} hoverState []
+     * State of hover over
+     */
+    hoverState: PropTypes.bool,
+    /**
+     * @prop {object} userData []
+     * Data object of the author
+     */
+    userData: PropTypes.object,
+    /**
+     * @prop {object} myData []
+     * Data object of the user
+     */
+    myData: PropTypes.object,
+    /**
+     * @prop {func} followUser []
+     * Function for invoking ajax to set following of user
+     */
+    followUser: PropTypes.func
+  };
 
   monthDiff(d1, d2) {
     var months;
@@ -16,13 +50,16 @@ export default class ProfileCard extends Component {
     return months <= 0 ? 0 : months;
   }
   isFollowing() {
-      const scope = this;
-      console.log(this.props.myData.subscriptions)
-      var follower = scope.props.myData.subscriptions.filter(function(v) {
-          return v.screenName == scope.props.userData.screenName
-      })
-      if(follower.length > 0) {
-          return true;
+      var scope = this;
+      if(scope.props.myData && scope.props.myData.subscriptions) {
+        var follower = scope.props.myData.subscriptions.filter(function(v) {
+            return v.screenName == scope.props.userData.screenName
+        })
+        if(follower.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
       } else {
           return false;
       }
@@ -77,7 +114,7 @@ export default class ProfileCard extends Component {
         }
       </div>
       <div className={this.props.hoverState ? "arrow" : "arrow-hidden"} style={{top: this.props.top +276, left: this.props.left + 25}}></div>
-      {this.props.hoverState && <div className={"guard-box"} style={{top: this.props.top +276, left: this.props.left}}></div>}
+      {this.props.hoverState && <div className={"profile-guard-box"} style={{top: this.props.top +276, left: this.props.left}}></div>}
     </div>
     );
   }
