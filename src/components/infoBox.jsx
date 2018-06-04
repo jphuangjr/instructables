@@ -32,7 +32,7 @@ export default class InfoBox extends Component {
     }
     return (
       <div className="info-box">
-        <img className="info-box-image" src={image} style={{background: "url("+ icons +") " + iconsLib[this.props.text]}} alt="?"/> {this.props.text === "Joined" ? <span><span>{this.props.text}</span> <span>{this.props.value}</span></span> : <span><span>{this.props.value}</span> <span>{this.props.text}</span></span>}
+        <img className="info-box-image" src={image} style={{background: "url("+ icons +") " + iconsLib[this.props.text]}} alt="?"/> {this.props.text === "Joined" ? <span><span>{this.props.text}</span> <span><b>{this.props.value}</b></span></span> : <span><span><b>{Number(parseInt(this.props.value, 10)).toLocaleString()}</b></span> <span>{this.props.text}</span></span>}
       </div>
     );
   }
