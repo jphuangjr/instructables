@@ -7,12 +7,20 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 - [Running the app](#running-the-app)
 - [Notes](#notes)
+- [Structure](#structure)
 
 ## Running the app
 
 After downloading the app, please run `npm install` to download all of the npm dependencies.
 
 To start the server, run `npm run start`. The app will run on http://localhost:3000 by default
+
+
+## Structure
+
+Ive create the app using React.js. Ive taken the template and have broken down the card components into their own modules. If you look at index.html, you'll see that its still loading some of the libraries and css but the template code has been moved out. The entry point on index.html is at `<div id="root"></div>`
+
+We will go ahead and load the main App.js into the root div. As you can see, ive extrapolated the card html into its own card component and its loaded by feeding the data as props from `data.js`. We can keep drilling deeper and see that card uses profileCard which uses infoBox etc.
 
 ## Notes
 
