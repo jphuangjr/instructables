@@ -95,6 +95,11 @@ export default class Card extends Component {
     this.setState({ hover: true, left: left, top: top });
 
   }
+  /*
+    Note: I am binding the mouseover event to the document body and calling the hoverOff on each element so that I close it when it hovers 
+    over a element with the "cover" className because if I were to hover off the name, it would automatically close when the user tries to
+    click on anything in the card popout
+   */
   hoverOff(e){
     const scope = this;
     var classes = e.target.className.split(" ");
@@ -105,7 +110,6 @@ export default class Card extends Component {
   componentDidMount() {
     document.body.addEventListener("mouseover", this.hoverOff.bind(this));
   }
-
   componentWillUnmount() {
     document.body.removeEventListener("mouseover", this.hoverOff.bind(this));
   }
