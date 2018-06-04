@@ -78,6 +78,7 @@ export default class Card extends Component {
   }
 
   followUser() {
+    const scope = this;
     var followingStatus = true;
     if(this.isFollowing.call(this)) {
       var followingStatus = false;
@@ -90,8 +91,8 @@ export default class Card extends Component {
     }).then(function(response) {
         return response.json();
     }).then(function(data) {
-        this.props.getUserData();
-        this.getUserData.call(this, this.state.userData.screenName);
+        scope.props.getUserData();
+        scope.getUserData.call(scope, scope.state.userData.screenName);
     });
   }
 
