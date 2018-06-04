@@ -12,7 +12,7 @@ class App extends Component {
       myData: {}
     };
   }
-  componentWillMount() {
+  getUserData() {
     var user = unescape(sampleCookie /* Replace with document.cookie on development */).split('"screenName":"')[1].split('",')[0];
     fetch('http://crossorigin.me/https://www.instructables.com/json-api/showAuthorModel?screenName=' + user,{
       mode: 'cors',
@@ -25,6 +25,9 @@ class App extends Component {
       }
     )
   }
+  componentWillMount() {
+    this.getUserData.bind(this)
+  }
   render() {
     const scope = this;
     return (
@@ -35,7 +38,7 @@ class App extends Component {
               <ul className="explore-covers-list clearfix">
                 {cardData.map(function(v, i){
                   v.myData = scope.state.myData;
-                  return <Card key={i} {...v}/>
+                  return <Card key={i} {...v} getUserData={scope.getUserData.bind(scope)}/>
                 })}
               </ul>
             </div>

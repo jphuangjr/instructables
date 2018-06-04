@@ -44,7 +44,12 @@ export default class Card extends Component {
      * @prop {object} myData []
      * Data object of the user
      */
-    myData: PropTypes.object
+    myData: PropTypes.object,
+    /**
+     * @prop {object} getUserData []
+     * callback to re request user data to get update subscriptions
+     */
+    getUserData: PropTypes.object
   };
  constructor(props) {
     super(props);
@@ -56,17 +61,37 @@ export default class Card extends Component {
     };
   }
 
+  isFollowing() {
+    var scope = this;
+    if(scope.props.myData && scope.props.myData.subscriptions) {
+      var follower = scope.props.myData.subscriptions.filter(function(v) {
+          return v.screenName === scope.state.userData.screenName
+      })
+      if(follower.length > 0) {
+          return true;
+      } else {
+          return false;
+      }
+    } else {
+        return false;
+    }
+  }
+
   followUser() {
+    var followingStatus = true;
+    if(this.isFollowing.call(this)) {
+      var followingStatus = false;
+    }
     const id = this.state.userData.id;
-    const opts = {following: true, memberId:id};
+    const opts = {following: followingStatus, memberId:id};
     fetch('https://www.instructables.com/json-api/setFollowing', {
         method: 'post',
         body: JSON.stringify(opts)
     }).then(function(response) {
         return response.json();
     }).then(function(data) {
-        console.log('Created Gist:', data);
-        this.getUserData.call(this, this.stae.userData.screenName);
+        this.props.getUserData();
+        this.getUserData.call(this, this.state.userData.screenName);
     });
   }
 

@@ -20,5 +20,5 @@ To start the server, run `npm run start`. The app will run on http://localhost:3
 
  - The `GET` requests using the user API is currently going through a proxy to overcome the cors issue. In dev, we can remove the proxy when the origin is the same as instructables.com. 
 
- - The `POST` request to follow other users is currently set up but will not work due to CORS issues.
+ - The `POST` request to follow other users is currently set up but will not work due to CORS issues. However, if the request were to go through, it will make a new Get request to the server to get the new data for both the author and the user itself and update the app accordingly eg. Button will change from follow -> following and count will increase
 
