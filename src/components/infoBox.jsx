@@ -27,12 +27,12 @@ export default class InfoBox extends Component {
         Lessons: "-2px -73px",
         Joined: "-2px -98px"
     }
-    if(this.props.value == 0 && this.props.text !== "Joined") {
+    if(this.props.value === 0 && this.props.text !== "Joined") {
       return <span></span>;
     }
     return (
       <div className="info-box">
-        <img className="info-box-image" src={image} style={{background: "url("+ icons +") " + iconsLib[this.props.text]}} /> {this.props.text == "Joined" ? <span><span>{this.props.text}</span> <span>{this.props.value}</span></span> : <span><span>{this.props.value}</span> <span>{this.props.text}</span></span>}
+        <img className="info-box-image" src={image} style={{background: "url("+ icons +") " + iconsLib[this.props.text]}} alt="?"/> {this.props.text === "Joined" ? <span><span>{this.props.text}</span> <span>{this.props.value}</span></span> : <span><span>{this.props.value}</span> <span>{this.props.text}</span></span>}
       </div>
     );
   }

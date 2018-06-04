@@ -4,9 +4,6 @@ import './componentResources/profileCard.css';
 import InfoBox from "./infoBox";
 
 export default class ProfileCard extends Component {
-  /*
-   {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData} myData={this.props.myData} followUser={this.followUser.bind(this)}/>}
-  */
   static propTypes = {
     /**
      * @prop {number} top []
@@ -53,7 +50,7 @@ export default class ProfileCard extends Component {
       var scope = this;
       if(scope.props.myData && scope.props.myData.subscriptions) {
         var follower = scope.props.myData.subscriptions.filter(function(v) {
-            return v.screenName == scope.props.userData.screenName
+            return v.screenName === scope.props.userData.screenName
         })
         if(follower.length > 0) {
             return true;
@@ -94,7 +91,7 @@ export default class ProfileCard extends Component {
             <div className="card-body">
                 <div className="card-top-section">
                     <div className="card-profile-image">
-                        <img src={user.square3Url} style={{width: "70px", height:"70px", borderRadius: "50%"}}/>
+                        <img alt={user.screenName} src={user.square3Url} style={{width: "70px", height:"70px", borderRadius: "50%"}}/>
                     </div>
                     <div className="card-user-section">
                         <div className="card-username">

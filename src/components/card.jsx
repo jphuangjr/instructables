@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from "react-dom";
 import './componentResources/card.css';
 import ProfileCard from "./profileCard";
-import Underscore from "underscore";
 
 export default class Card extends Component {
-  /*
-   props: link, img, title, authorProfile, authorHandle, channelLink, channel
-  */
  static propTypes = {
     /**
      * @prop {string} link []
@@ -118,7 +113,7 @@ export default class Card extends Component {
     return (
       <li>
         <div className="explore-cover-item cover-item">
-          <a className="cover-image cover" href={this.props.link}><img className="cover" src={this.props.img} title={this.props.title}/></a>
+          <a className="cover-image cover" href={this.props.link}><img className="cover" src={this.props.img} title={this.props.title} alt={this.props.title}/></a>
           <div className="cover-info cover">
             <span className="title"><a href={this.props.link}>{this.props.title}</a></span><br />
             {<ProfileCard top={this.state.top} left={this.state.left} hoverState={this.state.hover} userData={this.state.userData} myData={this.props.myData} followUser={this.followUser.bind(this)}/>}
